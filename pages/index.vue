@@ -1,19 +1,12 @@
 <template>
-  <v-container>
-    <section class='comments' aria-labelledby="comment">
-      <h2 id="comment">Comments</h2>
-      <Disqus />
-    </section>
-
-  </v-container>
+  <div>
+    <Disqus short_name="your Short name"></Disqus>
+  </div>
 </template>
 
 <script>
-import { Disqus } from 'vue-disqus'
 export default {
-  name: 'IndexPage',
-  components: {
-    Disqus
-  }
+
 }
+
 </script>

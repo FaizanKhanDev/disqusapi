@@ -25,7 +25,9 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: "~/plugins/disqus/index.js", mode: 'client' }
+    // { src: "~/plugins/disqus/index.js", mode: 'client' },
+    // { src: "~/plugins/tiptapeditor/index.js", mode: 'client' },
+    { src: "~/plugins/bunny/index.js", mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -40,6 +42,7 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
   ],
+  // transpileDependencies: ["vuetify", "@peepi/vuetify-tiptap"],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
@@ -62,5 +65,8 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    // transpile: ['vuetify/lib', "tiptap-vuetify"]
+    transpileDependencies: ["vuetify", "@peepi/vuetify-tiptap"],
+
   }
 }
