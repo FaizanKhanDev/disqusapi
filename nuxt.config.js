@@ -1,6 +1,9 @@
 import colors from 'vuetify/es5/util/colors'
 
+
+
 export default {
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - disqus',
@@ -27,11 +30,13 @@ export default {
   plugins: [
     // { src: "~/plugins/disqus/index.js", mode: 'client' },
     // { src: "~/plugins/tiptapeditor/index.js", mode: 'client' },
-    { src: "~/plugins/bunny/index.js", mode: 'client' },
+    // { src: "~/plugins/bunny/index.js", mode: 'client' },
+    { src: "~/plugins/nhost/index.js", mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
+
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -39,8 +44,20 @@ export default {
     '@nuxtjs/vuetify',
   ],
 
+
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: 'https://.hasura.ap-south-1.nhost.run/v1/graphql', // Replace with your GraphQL endpoint,
+        httpLinkOptions: {
+          credentials: 'include'
+        }
+      }
+    }
+  },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/apollo'
   ],
   // transpileDependencies: ["vuetify", "@peepi/vuetify-tiptap"],
 
@@ -65,8 +82,14 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    // transpile: ['vuetify/lib', "tiptap-vuetify"]
-    transpileDependencies: ["vuetify", "@peepi/vuetify-tiptap"],
-
+    extend(config) {
+      config.module.rules.push({
+        test: /\.mjs$/,
+        include: /node_modules/,
+        type: 'javascript/auto',
+      })
+    },
   }
+
 }
+
