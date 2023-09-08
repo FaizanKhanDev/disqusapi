@@ -48,9 +48,9 @@ export default {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: 'https://.hasura.ap-south-1.nhost.run/v1/graphql', // Replace with your GraphQL endpoint,
+        httpEndpoint: '', // Replace with your GraphQL endpoint,
         httpLinkOptions: {
-          credentials: 'include'
+          // credentials: 'include'
         }
       }
     }
@@ -65,9 +65,9 @@ export default {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      light: true,
       themes: {
-        dark: {
+        light: {
           primary: colors.blue.darken2,
           accent: colors.grey.darken3,
           secondary: colors.amber.darken3,
