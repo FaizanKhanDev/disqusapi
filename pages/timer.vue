@@ -1,47 +1,36 @@
 <template>
-    <section>
-        <stop-watch v-show="isStarted || isFinished" ref="stopWatch" class="digits" :hours="false" :minutes="false"
-            @start="setStartTime" @stop="setStopTime" @lap="setLapTime" />
-
-        <button @click="$refs.stopWatch.start()">Start</button>
-        <button @click="$refs.stopWatch.lap('42')">Lap</button>
-        <button @click="$refs.stopWatch.stop()">Stop</button>
-        <button @click="$refs.stopWatch.reset()">Reset</button>
-    </section>
+    <div>
+        <h1>Stopwatch</h1>
+        <div>
+            <p v-if="isRunning">Running...</p>
+            <p v-else>Stopped</p>
+            <p>Start Time: {{ startTime }}</p>
+            <p>End Time: {{ endTime }}</p>
+        </div>
+        <v-btn @click="start" :disabled="isRunning">Start</v-btn>
+        <v-btn @click="end" :disabled="!isRunning">End</v-btn>
+    </div>
 </template>
 
 <script>
-import StopWatch from '@/components/StopWatch.vue';
-
 export default {
-    components: {
-        StopWatch
-    },
     data() {
         return {
-            isStarted: false,
-            isFinished: false,
+            isRunning: false,
+            startTime: null,
+            endTime: null,
         };
     },
     methods: {
-        setStartTime(timestamp) {
-            console.log(timestamp);
+        start() {
+            this.isRunning = true;
+            console.log("fired")
+            this.startTime = new Date().toLocaleTimeString();
         },
-        setStopTime(timestamp, formattedTime) {
-            console.log(timestamp, formattedTime);
+        end() {
+            this.isRunning = false;
+            this.endTime = new Date().toLocaleTimeString();
         },
-        setLapTime(timestamp, formattedTime, id) {
-            console.log(timestamp, formattedTime, id);
-        },
-        pause() {
-            this.isRunning = !this.isRunning
-            if (this.isRunning) {
-                this.startTime = performance.now()
-                this.calculate(performance.now())
-                this.frameId = requestAnimationFrame(this.step)
-            }
-            this.$emit('pause', this.isRunning, this.time)
-        }
     },
 };
 </script>
